@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from flask import Flask, render_template, request, url_for, redirect
-import textprocess
+import tokenizer
 import execute
 
 app= Flask(__name__.split('.')[0]) #specify what belongs to application
@@ -18,12 +18,12 @@ def index():
 
     if request.method == 'POST':
         query = request.form['filename']
-        squery = textprocess.query(query)
+        squery = tokenizer.tokenize(query)
         s = execute.execi(squery)
         if not s:
             return redirect(url_for('search'))
         else:
-            return "ERROR"
+            return "ERROR executing: " + squery
 
     return render_template('index.html')
 
@@ -31,7 +31,7 @@ def index():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     global s
-    return "i was here"
+    return "Executed Successfully"
 
 if __name__ == '__main__':
     app.debug = True
