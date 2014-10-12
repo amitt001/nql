@@ -2,6 +2,10 @@
 
 import sqlite3
 
+'''
+execute the normalized sql queries on database
+'''
+
 def execi(query):
     db = sqlite3.connect('db/nql.db') 
     cursor = db.cursor()
@@ -17,4 +21,5 @@ def execi(query):
         db.close
  
 if __name__ == '__main__':
-     execi()
+     err = execi('create table amit(id integer primary key, name text)')
+     print(err)
