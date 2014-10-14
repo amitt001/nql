@@ -23,8 +23,8 @@ def stopwordremover(text):
     data = normalizer.normalize(data)
 
     newdata = [newtext for newtext in data if newtext not in stopwords['english']]
-    chata = ' '.join(newdata)
-    return chata
+#    chata = ' '.join(newdata)
+    return newdata
 
 
 if __name__ == '__main__':

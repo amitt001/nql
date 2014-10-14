@@ -11,7 +11,6 @@ def tokenize(text):
     data = data.split(' ')
     for index,word in enumerate(data):  # for wo:rd, am,it etc cases
         if re.match('[a-z0-9]+(?i)\W+[a-z0-9]+(?i)', word):
-            print('I was here')
             data[index] = word.replace(word, re.sub('\W+','',word))
     data = ' '.join(data)
 
