@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import tokenizer
+import languageprocess1.tokenizer
 import re
 
 
@@ -9,7 +9,7 @@ Normalize the given text
 '''
 
 def normalize(text):
-    data = tokenizer.tokenize(text)
+    data = languageprocess1.tokenizer.tokenize(text)
     for i,value in enumerate(data):
         if not re.match(r'^[A-Z]*$', value):
             data[i] = value.lower()
