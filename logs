@@ -188,3 +188,30 @@ Query: new tab;le amit with 3 columns id of type integer sname of type text clas
 Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
 SQLized: CREATE table amit ( id integer, sname text, class text )
 
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit ( id integer, sname text, class text )
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit (a)
+
+Query: new tab;le amit with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table amit (" id integer", " sname text", " class text ")
+
+Query: make a table named randoma with 3 columns id of type integer sname of type text class type text
+SQLized: CREATE table randoma (" id integer", " sname text", " class text ")
+

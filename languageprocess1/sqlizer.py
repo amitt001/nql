@@ -60,9 +60,9 @@ def sqltokenize(qinput):
         for index, i in enumerate(attrData):
             attrData[index] = '"' + i + '"' + ','
         attrData = ' '.join(attrData)
-        attrData = attrData.rstrip(', )') + ' )'
-#        temp =         print(temp[0])
-        re.sub(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData, data) 
+        attrData = attrData.rstrip(',')
+
+        data = data.replace(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData)
         print(data)
         return data
 
