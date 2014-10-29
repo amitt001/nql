@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import languageprocess1.stopword
+import re
 
 '''
 SQLIZE the Normal query data to sql syntax
@@ -47,13 +48,22 @@ def sqltokenize(qinput):
         for index, value in enumerate(data):
             if 'table' in value:
                 ind = data.index(value) 
-                data[ind+2] = '(' + data[ind+2] 
+                data[ind+2] = '( ' + data[ind+2] 
             if 'integer' in value or 'text' in value:
                 data[index] = data[index] + ','
-
         data = ' '.join(data)
-        data = data.rstrip(',') + ')'
-
+        data = data.rstrip(',') + ' )'
+# for putting quots around attributes        
+        attrData = (re.findall(r"(?<= \()(.*)(?=\))", data)) 
+#        for attr in attrData[0].split(','):
+        attrData = attrData[0].split(',')
+        for index, i in enumerate(attrData):
+            attrData[index] = '"' + i + '"' + ','
+        attrData = ' '.join(attrData)
+        attrData = attrData.rstrip(', )') + ' )'
+#        temp =         print(temp[0])
+        re.sub(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData, data) 
+        print(data)
         return data
 
     elif "SELECT" in qinput:
@@ -61,9 +71,15 @@ def sqltokenize(qinput):
         for index, value in enumerate(data):
             if 'table' in value:
                 data.pop(index)
+        data.insert(-1, '=')
         data = ' '.join(data)
         return data
     return qinput
+
+# sql query template
+def sqltemplate(qinput):
+    querydict = ['CREATE', 'TABLE', '(', ')']
+
 
 
 if __name__ == '__main__':

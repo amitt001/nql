@@ -5,3 +5,7 @@ To do list about project
 - fuzzy search of words
 - improvig query from standard ones
 - self improvement
+
+29
+
+- chek english word or not enchant
