@@ -7,6 +7,7 @@ Tokenizes the string input coming from web app.
 '''
 
 def tokenize(text):
+
     data = text
     data = data.split(' ')
     for index,word in enumerate(data):  # for wo:rd, am,it etc cases. Words with ' are not tokenized
@@ -18,7 +19,6 @@ def tokenize(text):
     data = ' '.join(data)
     
     data = data.replace('\n','`').replace('\t','`').replace('-','`').replace(':','`').replace(';','`').replace('. ', '`').replace('.', '`').replace(' ', '`').split('`')
-
 
     data = filter(None, data)
     return list(data)
