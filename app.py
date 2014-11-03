@@ -1,46 +1,50 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 import tokenizer
 import execute
 import languageprocess1.sqlizer
 import languageprocess1.tokenizer
 import sys
+import os
 
-app= Flask(__name__.split('.')[0]) #specify what belongs to application
-#app.config.from_envvar('NQL_SETTINGS', silent=True)
+#specify what belongs to application
+app= Flask(__name__.split('.')[0]) 
 
-s = ''
-quer = ''
+app.secret_key = os.urandom(10)
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-
-    global s
+    
+    '''application home page with search box'''
 
     if request.method == 'POST':
         query = request.form['filename']
-        #squery = tokenizer.tokenize(query)
         squery = languageprocess1.sqlizer.sqlize(query)
-        print(squery)
         s = execute.execi(squery)
-        print(s)
         global quer 
         quer = squery
         if not s:
-            return redirect(url_for('search'))
+            result = "Executed Successfully:" + quer
+            session['result'] = result
+            return redirect(url_for('search', result=result))
         else:
-            return "ERROR executing: " + squery
+            result = "Error: " + str(s)
+            session['result'] = result
+            return redirect(url_for('search', result=result))
+
+#            return "ERROR executing: " + squery + " , ERROR: " + str(s)
 
     return render_template('index.html')
 
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    global s
-    return "Executed Successfully:" + quer
+    result = request.args['result']
+    result = session['result']
+    return result
 
 if __name__ == '__main__':
     app.debug = True

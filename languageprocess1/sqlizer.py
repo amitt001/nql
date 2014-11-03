@@ -52,14 +52,15 @@ def sqltokenize(qinput):
         data = ' '.join(data)
         data = data.rstrip(',') + ' )'
 # for putting " around attributes. All the attributes between ( and ) are selected
-        attrData = (re.findall(r"(?<= \()(.*)(?=\))", data)) 
-        attrData = attrData[0].split(',')
-        for index, i in enumerate(attrData):
-            attrData[index] = '"' + i + '"' + ','
-        attrData = ' '.join(attrData)
-        attrData = attrData.rstrip(',')
+#        attrData = (re.findall(r"(?<= \()(.*)(?=\))", data)) 
+#        attrData = attrData[0].split(',')
+#        for index, i in enumerate(attrData):
+#            attrData[index] = '"' + i + '"' + ','
+#        attrData = ' '.join(attrData)
+#        attrData = attrData.rstrip(',')
+#        print(attrData)
 
-        data = data.replace(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData)
+#        data = data.replace(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData)
         return data
 
     elif "SELECT" in qinput or 'from' in qinput or 'where' in qinput:

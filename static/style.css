@@ -1,0 +1,47 @@
+a {
+text-decoration: none;
+padding : 2px;
+margin-left: 50px;
+margin-top: 10px;
+width : 130px ;
+height: 70px;
+border-radius: 5px;
+background-color: #C2BABC;
+}
+ul li{
+list-style: none;
+display: inline;
+float: right;
+padding: 10px;
+}
+ul li a{
+background-color: #2E2E2E;
+color :#FFF;
+about.html
+border-radius: 3px;
+{% extends “base.html” %} }
+{% block content %}
+<p>This is about page of flask</p>
+{% endblock %} .container {
+margin-top: 20px;
+margin-left: 70px;
+width: 500px;
+posts.html
+}
+{% extends “base.html” %}
+{% block content %}
+{% for post in posts %}
+<div class=”title”>
+<h2>{{post.title}} </h2>
+</div>
+<div class=”content”>
+<p>{{post.body}}</p>
+</div>
+{% endfor %}
+{% endblock %}
+In manage.py, the content for the post page is passed using
+the render_template method and can be identified using its key.
+style.css
+.title {
+background-color:#C2BABC;
+}
