@@ -15,11 +15,14 @@ stopwords['english'] = ['a', 'about', 'above', 'after', 'again', 'against', 'am'
 
 
 def stopwordremover(text):
+
     data = text
     data = languageprocess1.normalizer.normalize(data)
     if 'select' not in data and 'from' not in data: #improve
-        newdata = [newtext for newtext in data if newtext not in stopwords['english'] and not newtext.isdigit()] # to check stopword and numbers
-    else: # for cases where numbers are required for ex select statemenets
+        newdata = [newtext for newtext in data if newtext not in stopwords['english'] and not newtext.isdigit()] 
+        # to check stopword and numbers
+    else: 
+        # for cases where numbers are required for ex select statemenets
         newdata = [newtext for newtext in data if newtext not in stopwords['english']] # to check stopword
     
     return newdata
