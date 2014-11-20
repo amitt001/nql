@@ -20,6 +20,7 @@ sqldict.setdefault('where', ['whose', 'where"s'])
 #sqldict.setdefault('FROM', ['from'])
 #sqldict.setdefault()
 
+
 def sqlize(qinput):
     # log queries
     fobj = open('logs', 'a');
@@ -33,16 +34,23 @@ def sqlize(qinput):
     
     data = ' '.join(data)
     data = sqltokenize(data)
-    fobj.write('SQLized: ' + data + '\n\n')
+    fobj.write('SQLized: ' + data + '\n\n') #logging
     fobj.close()
+
     return data
 
 datatype = ['text', 'integer', 'varchar']
 
-def sqltokenize(qinput):
 
-    if "CREATE" in qinput:
+def sqltokenize(qinput):
+    
+    '''
+    To formet the SQL query by putting brackets and quotes
+    '''
+
+    if 'CREATE' in qinput:
         data = qinput.split()
+        data = create_check(data)
         for index, value in enumerate(data):
             if 'table' in value:
                 ind = data.index(value) 
@@ -51,19 +59,9 @@ def sqltokenize(qinput):
                 data[index] = data[index] + ','
         data = ' '.join(data)
         data = data.rstrip(',') + ' )'
-# for putting " around attributes. All the attributes between ( and ) are selected
-#        attrData = (re.findall(r"(?<= \()(.*)(?=\))", data)) 
-#        attrData = attrData[0].split(',')
-#        for index, i in enumerate(attrData):
-#            attrData[index] = '"' + i + '"' + ','
-#        attrData = ' '.join(attrData)
-#        attrData = attrData.rstrip(',')
-#        print(attrData)
-
-#        data = data.replace(re.findall(r"(?<= \()(.*)(?=\))", data)[0], attrData)
         return data
 
-    elif "SELECT" in qinput or 'from' in qinput or 'where' in qinput:
+    elif 'SELECT' in qinput or 'from' in qinput:
         data = qinput.split()
         for index, value in enumerate(data):
             if 'table' in value:
@@ -75,7 +73,39 @@ def sqltokenize(qinput):
         data = sqltemplate(data)
         data = ' '.join(data)
         return data
+
+    else:
+        '''
+        Rightnow considering else case as insert case
+        '''
+
+        data = qinput.split()
+        data = insert_token(data)
+        data.insert(0, 'INSERT INTO')
+        data = ' '.join(data)
+        return data
     return qinput
+
+
+def insert_token(qinput):
+    '''
+    for proper formatting of the insert queries i.e. quotes and commas
+    '''
+    attr = []
+    val = []
+    newdata = []
+    data = qinput
+    length = len(data) - 1 #index starts with 0
+    for index,word in enumerate(data):
+        if word == '=': #and index+1 != length: # last check to correct last ','
+            attr.append(data[index-1])
+            val.append(data[index+1])
+    attr,val = tuple(attr), tuple(val)
+    newdata = [data[0]]
+    newdata.append(str(attr))
+    newdata.append('VALUES')
+    newdata.append(str(val))
+    return newdata
 
 def sqltemplate(data):
 
@@ -92,6 +122,18 @@ def sqltemplate(data):
             data.insert(0, 'SELECT')
             return data
     return data
+
+
+def create_check(data):
+    
+    '''
+    check the correct sequence of the CREATE query
+    '''
+    
+    if 'table' not in data:
+        data.insert(1, 'table')
+    return data
+
 
 if __name__ == '__main__':
     data = 'choOSe or select o.r : find or elect'

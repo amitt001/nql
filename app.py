@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from flask import Flask, render_template, request, url_for, redirect, session
-import tokenizer
 import execute
 import languageprocess1.sqlizer
 import languageprocess1.tokenizer

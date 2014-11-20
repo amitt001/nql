@@ -18,8 +18,9 @@ def stopwordremover(text):
 
     data = text
     data = languageprocess1.normalizer.normalize(data)
+#######################################improve this for digits, removed for inser query#############################
     if 'select' not in data and 'from' not in data: #improve
-        newdata = [newtext for newtext in data if newtext not in stopwords['english'] and not newtext.isdigit()] 
+        newdata = [newtext for newtext in data if newtext not in stopwords['english']] #and not newtext.isdigit()]###check this for digit##### 
         # to check stopword and numbers
     else: 
         # for cases where numbers are required for ex select statemenets

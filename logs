@@ -1,1 +1,6 @@
+Query: new tab;le amit with 3 columns 'id integer' 'name text' 'class text'
+SQLized: CREATE table amit ( 'id integer', 'name text', 'class text' )
+
+Query: user id = 35 name = amit
+SQLized: INSERT INTO user ('id', 'name') VALUES ('35', 'amit')
 

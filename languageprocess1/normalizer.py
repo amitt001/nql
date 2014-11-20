@@ -13,7 +13,6 @@ def normalize(text):
     for i,value in enumerate(data):
         if not re.match(r'^[A-Z]*$', value) and ('"' or "'") not in value:
             data[i] = value.lower()
-
     return data
 
 
