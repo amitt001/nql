@@ -25,6 +25,7 @@ def index():
         s = execute.execi(squery)
         global quer 
         quer = squery
+        print(quer)
         if not s:
             result = "Executed Successfully:" + quer
             session['result'] = result
@@ -47,4 +48,4 @@ def search():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')

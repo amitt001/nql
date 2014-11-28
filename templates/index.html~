@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+                    <H3 id="h">NQL<h3>
+
+<form method="post" class="searchform" action="">
+    <input type="text" class="searchfield" placeholder="Natural query..." name="filename" autofocus></br></br>
+//    <input type="submit" value="submit" style="float: right; color: #18D697;">
+</form>
+
+{% endblock %}

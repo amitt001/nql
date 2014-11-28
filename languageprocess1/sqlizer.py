@@ -17,8 +17,8 @@ sqldict.setdefault('VALUES', ['value', 'data', 'values'])
 # specify more sql syntax
 sqldict.setdefault('*', ['all', 'each'])
 sqldict.setdefault('where', ['whose', 'where"s'])
-#sqldict.setdefault('FROM', ['from'])
-#sqldict.setdefault()
+sqldict.setdefault('FROM', ['from'])
+sqldict.setdefault('DROP', ['delete', 'remove', 'drop'])
 
 
 def sqlize(qinput):
@@ -27,13 +27,19 @@ def sqlize(qinput):
     fobj.write('Query: ' + qinput + '\n')
 
     data = languageprocess1.stopword.stopwordremover(qinput)
-    for i in data:
+    for i in data:      # sql word synonyms corrections
         for key, value in sqldict.items():
             if i.lower() in value:
                 data[data.index(i)] = key
     
+    #for single word databse internal queries
+    length = len(data) 
     data = ' '.join(data)
-    data = sqltokenize(data)
+    if length > 2 :
+        data = sqltokenize(data)
+    else: #maybe sqlite specific-*check
+        data = singlequery(data)
+
     fobj.write('SQLized: ' + data + '\n\n') #logging
     fobj.close()
 
@@ -43,7 +49,9 @@ datatype = ['text', 'integer', 'varchar']
 
 
 def sqltokenize(qinput):
-    
+    return qinput
+
+def useless(qinput):
     '''
     To formet the SQL query by putting brackets and quotes
     '''
@@ -99,12 +107,27 @@ def insert_token(qinput):
     for index,word in enumerate(data):
         if word == '=': #and index+1 != length: # last check to correct last ','
             attr.append(data[index-1])
-            val.append(data[index+1])
+########################Important
+            flag = 1
+            broken = ''
+            for i,j in enumerate(data[index + 1:]):
+                if j != '=':
+                    broken += j
+                if j == '=':
+                    val.append(broken)
+                    break
+
+                else:
+                    flag = 1
+            if flag == 1:
+                val.append(data[index + 1:])
+#            val.append(data[index+1])
     attr,val = tuple(attr), tuple(val)
     newdata = [data[0]]
     newdata.append(str(attr))
     newdata.append('VALUES')
     newdata.append(str(val))
+    print(newdata)
     return newdata
 
 def sqltemplate(data):
@@ -132,8 +155,25 @@ def create_check(data):
     
     if 'table' not in data:
         data.insert(1, 'table')
+    if 'primary' in data:
+        if 'key' in data:
+            del data[data.index('key')]
+
     return data
 
+
+def singlequery(data):
+    '''For processing smqll length queries that doesn't need much processing
+    *Some conditions may be of sql specific.*
+    '''
+    if ('table' or 'tables') in data:
+        data = '.tables'
+        return data
+    elif 'DROP' in data:
+        data = data.split()
+        data.insert(data.index('DROP') + 1, 'TABLE' )
+        data = ' '.join(data)
+        return data
 
 if __name__ == '__main__':
     data = 'choOSe or select o.r : find or elect'

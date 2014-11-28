@@ -1,29 +1,26 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-{% if title %}
-<title> {{title}}</title>
-{% else %}
-<title> NQL </title>
-{% endif %}
-<link rel=”stylesheet” type=”text/css” href=”{{ url_
-for(‘static’, filename=’css/style.css’) }}”>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta lang="en">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>NQL</title>
+    {% endif %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!--Style-->
 </head>
 <body>
-<header>
-<h1><a href=”{{url_for(‘index’)}}”>MyApp</a></h1>
-</header>
-<div class=”menu”>
-<ul>
-<li><a href=”{{url_for(‘index’)}}”>Home</a></
-li>
-<li><a href=”{{url_for(‘about’)}}”>About</a></
-li>
-<li><a href=”{{url_for(‘posts’)}}”>Post</a></
-li>
-</ul>
-</div>
-<div class=”container”>
-{% block content %}{% endblock %}
-</div>
+    <div class="header">
+        <a href="http://127.0.0.1:5000/"><h1 class="text-left" style="display: inline-block;">NQL</h1></a>
+        <div style="display: inline-block; float: right; padding-right: 100px; padding-top: 20px;">
+            <a class="headerlink" href="contact.html">Contact</a>
+            <a class="headerlink" href="about.html">About</a>
+        </div>
+    </div>
+
+    {% block content %}{% endblock %}
 </body>
+</html>

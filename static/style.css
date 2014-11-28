@@ -1,47 +1,78 @@
-a {
-text-decoration: none;
-padding : 2px;
-margin-left: 50px;
-margin-top: 10px;
-width : 130px ;
-height: 70px;
-border-radius: 5px;
-background-color: #C2BABC;
+body{
+        background-color: //#C6E2EE;//#97CD0C;//#373F46;
+    }
+
+h1{
+color: lightblue;
 }
-ul li{
-list-style: none;
-display: inline;
-float: right;
-padding: 10px;
+
+a.headerlink {
+    color: #1E6823;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+    }
+a:hover.headerlink {
+    color: #4183C4;
+    text-decoration: underline;
+    }
+    
+.header{
+//    overflow:hidden; 
+//    width: 100%; 
+//    height: auto; 
+//    position: relative;     
+//    background-color: #242424;
+ //#F5F5F5;
+    }
+
+
+
+
+/* search form 
+-------------------------------------- */
+.searchform {
+    border-radius: 12em;
+    bottom: 0;
+    display: inline-block;
+    height: 66px;
+    left: 0;
+    margin: auto;
+    padding-left: 30%;
+
+    position: relative;
+    right: 0;
+    top: 0;
+    width: 515px;
 }
-ul li a{
-background-color: #2E2E2E;
-color :#FFF;
-about.html
-border-radius: 3px;
-{% extends “base.html” %} }
-{% block content %}
-<p>This is about page of flask</p>
-{% endblock %} .container {
-margin-top: 20px;
-margin-left: 70px;
-width: 500px;
-posts.html
+
+.searchform input {
+	font: normal 24px/100% Arial, Helvetica, sans-serif;
 }
-{% extends “base.html” %}
-{% block content %}
-{% for post in posts %}
-<div class=”title”>
-<h2>{{post.title}} </h2>
-</div>
-<div class=”content”>
-<p>{{post.body}}</p>
-</div>
-{% endfor %}
-{% endblock %}
-In manage.py, the content for the post page is passed using
-the render_template method and can be identified using its key.
-style.css
-.title {
-background-color:#C2BABC;
+
+
+.searchform .searchfield {
+	font: normal 35px/100% Georgia, Arial, Helvetica, sans-serif;
+	background: #fff;
+	padding: 6px 20px 6px 20px;
+	width: 95%;
+	border: solid 2px #38B307;
+	outline: none;
+	height: 100px;
+
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+
+	-moz-box-shadow: inset 0 1px 2px black;
+	-webkit-box-shadow: inset 0 1px 2px black;
+	box-shadow: inset 0 1px 2px black;
 }
+#h{
+    text-align: center;
+    color: #47EDCF;
+    font-family: "Georgia";
+    font-size: 70px;
+    //padding: 0 1px 60px 50px;
+}
+

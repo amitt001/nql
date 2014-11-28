@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta lang="en">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>NQL</title>
+    {% endif %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <!--Style-->
+</head>
+<body>
+    <div class="header">
+        <a href="http://127.0.0.1:5000/"><h1 class="text-left" style="display: inline-block;">NQL</h1></a>
+    </div>
+        <div style="display: inline-block; float: right; padding-right: 100px; padding-top: 20px;">
+            <a class="headerlink" href="contact.html">Contact</a>
+            <a class="headerlink" href="about.html">About</a>
+        </div>
+
+    {% block content %}{% endblock %}
+</body>
+</html>
