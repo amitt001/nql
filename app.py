@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, request, url_for, redirect, session
 import execute
-import languageprocess1.sqlizer
+import languageprocess1.creater
 import languageprocess1.tokenizer
 import sys
 import os
@@ -21,30 +21,33 @@ def index():
 
     if request.method == 'POST':
         query = request.form['filename']
-        squery = languageprocess1.sqlizer.sqlize(query)
+        squery = languageprocess1.creater.sqlize(query)
         s = execute.execi(squery)
         global quer 
         quer = squery
         print(quer)
-        if not s:
-            result = "Executed Successfully:" + quer
-            session['result'] = result
-            return redirect(url_for('search', result=result))
-        else:
-            result = "Error: " + str(s)
+#        if s:
+#            result = "Executed Successfully:" + quer
+#            session['result'] = result
+#            return redirect(url_for('search', result=result))
+        if s:
+            result = str(s)
             session['result'] = result
             return redirect(url_for('search', result=result))
 
 #            return "ERROR executing: " + squery + " , ERROR: " + str(s)
 
-    return render_template('index.html')
+    return render_template('index.html', title='NQL')
 
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     result = request.args['result']
     result = session['result']
-    return result
+    return render_template('result.html', value=result)
+#    print()
+#    return render_template('result.html', value=result)
+
 
 if __name__ == '__main__':
     app.debug = True

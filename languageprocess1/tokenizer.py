@@ -16,7 +16,7 @@ def tokenize(text):
             data[index] = word.replace(word, re.sub('[0-9]+', '', data[index]))
 
     data = ' '.join(data)
-    data = data.replace('\n','`').replace('\t','`').replace('-','`').replace(':','`').replace(';','`').replace('. ', '`').replace('.', '`').replace(' ', '`').split('`')
+    data = data.replace('\n','`').replace('\t','`').replace('-','`').replace(':','`').replace(';','`').replace('. ', '`').replace('.', '`').replace(' ', '`').replace(',','`').split('`')
 
     data = filter(None, data)
     return list(data)

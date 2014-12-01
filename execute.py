@@ -12,10 +12,16 @@ def execi(query):
     #query = "CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT, phone TEXT, email TEXT unique, password TEXT)"
 
     try:
-        cursor.execute(query)
+        if 'SELECT' in query:
+            cursor.execute(query)
+            all_rows = cursor.fetchall()
+            return all_rows
+        else:
+            cursor.execute(query)
         db.commit()
     except Exception as e:
         db.rollback()
+        print(e)
         return e
     finally:
         db.close

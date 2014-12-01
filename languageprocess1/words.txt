@@ -1,5 +1,0 @@
-students
-user_subj
-subject
-class
-user_name

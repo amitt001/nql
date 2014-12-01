@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import languageprocess1.sqlizer
+import languageprocess1.creater
 import sys
 
 '''
@@ -11,6 +11,6 @@ try:
     query = sys.argv[1]
 except:
     query = "new tab;le amit with 3 columns 'id integer' 'name text' 'class text'"
-i = languageprocess1.sqlizer.sqlize(query)
+i = languageprocess1.creater.sqlize(query)
 
 print(i)

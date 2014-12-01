@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <p>Your Query Result</p>
+<hr>
+<h1>Your Result</h1>
+    {% if value %}
+    <h1>{{ value }}</h1>
+    {% else %}
+    <h1 text-color='RED'>No Result</h1>
+    {% endif  %}
 {% endblock %}
