@@ -2,6 +2,16 @@
     "user": [
         "id", 
         "name", 
-        "class"
+        "address"
+    ],
+    "student": [
+        "id",
+        "name",
+        "score"
+    ],
+    "college": [
+        "coll_id", 
+        "coll_name", 
+        "location"
     ]
 }

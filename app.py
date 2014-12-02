@@ -25,17 +25,14 @@ def index():
         s = execute.execi(squery)
         global quer 
         quer = squery
-        print(quer)
-#        if s:
-#            result = "Executed Successfully:" + quer
-#            session['result'] = result
-#            return redirect(url_for('search', result=result))
         if s:
             result = str(s)
             session['result'] = result
             return redirect(url_for('search', result=result))
-
-#            return "ERROR executing: " + squery + " , ERROR: " + str(s)
+        else:
+            result = str(s)
+            session['result'] = result
+            return redirect(url_for('search', result=result))
 
     return render_template('index.html', title='NQL')
 
@@ -44,6 +41,7 @@ def index():
 def search():
     result = request.args['result']
     result = session['result']
+    print(result)
     return render_template('result.html', value=result)
 #    print()
 #    return render_template('result.html', value=result)

@@ -121,15 +121,20 @@ def sqltokenize(qinput):
                     newinput.append(val + sign)
                     newinput.append('sql')
                     qinput.remove(val)
-            except:
-                return ['ERROR1']
+            except Exception as e:
+                print(e)
+                return ['ERROR: Maybe you need to submit new table info to Word.json']
 
         if not flag:
             newinput.append('1')
+            return newinput
         # to get values
-        lenth = len(qinput)
-        for l in range(lenth):
-            newinput[newinput.index('sql')] = qinput[l] + ','
+        try:
+            lenth = len(qinput)
+            for l in range(lenth):
+                newinput[newinput.index('sql')] = qinput[l] + ','
+        except:
+            return ['This table schema doesnt exists in "words.json" file']
         newinput[-1] = newinput[-1].rstrip(',')
         return newinput
 
@@ -216,7 +221,7 @@ def singlequery(data):
         data = "SELECT name FROM sqlite_master WHERE type='table'".split()
         return data
     elif 'schema' in data:
-        return ['.schema']
+        return ['schema']
     elif 'DROP' in data:
         data.insert(data.index('DROP') + 1, 'TABLE' )
         return data
