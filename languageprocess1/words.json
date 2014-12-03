@@ -1,14 +1,29 @@
 {
+    "book": [
+        "id", 
+        "name", 
+        "class"
+    ], 
+    "computer_no": [
+        "part_no", 
+        "name", 
+        "supplier"
+    ], 
+    "student": [
+        "id", 
+        "name", 
+        "score"
+    ], 
     "user": [
         "id", 
         "name", 
         "address"
-    ],
-    "student": [
-        "id",
-        "name",
-        "score"
-    ],
+    ], 
+    "nql": [
+        "nql_tab_no", 
+        "nql_user", 
+        "country"
+    ], 
     "college": [
         "coll_id", 
         "coll_name", 

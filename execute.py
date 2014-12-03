@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sqlite3
+import json
 
 '''
 execute the normalized sql queries on database
@@ -22,14 +23,40 @@ def execi(query):
                 cursor.execute(query)
                 all_rows = cursor.fetchall()
             return all_rows
-        elif query == 'schema':
+        elif 'schema' in query:
             query = "SELECT name,sql FROM sqlite_master WHERE type='table'"
             cursor.execute(query)
             schema = cursor.fetchall()
             return schema
         else:
             cursor.execute(query)
-            return 'Successful with interpreted query as: ' + query
+            oquery = query
+            if 'CREATE' in query:
+                print('************************************************************')# json data
+                query = query.split()
+                worddict = {}
+                flag = 1
+                for words in query:
+                    if words.islower():
+                        if flag == 1:
+                            worddict.setdefault(words,[])
+                            flag = 0
+                            key = words
+                        else:
+                            worddict[key].append(words)
+                print(worddict)
+                fo = open('languageprocess1/words.json')
+                js = json.load(fo)
+                if not js.get(key):
+                    #copy dict
+                    z = js.copy()
+                    z.update(worddict)
+                    fo.close()
+                    #dump json
+                    fo = open('languageprocess1/words.json', 'w')
+                    json.dump(z, fo, indent = 4)
+
+            return 'Successful with interpreted query as: ' + oquery
         db.commit()
     except Exception as e:
         db.rollback()

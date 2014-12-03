@@ -174,22 +174,6 @@ def insert_token(qinput):
             if i == lnth:
                 stri += data[i-1]
             val.append(stri)
-                
-########################Important
-#            flag = 1
-#            broken = ''
-#            for i,j in enumerate(data[index + 1:]):
-#                if j != '=':
-#                    broken += j
-#                if j == '=':
-#                    val.append(broken)
-#                    break
-#
-#                else:
-#                    flag = 1
-#            if flag == 1:
-#                val.append(data[index + 1:])
-#            val.append(data[index+1])
     attr,val = tuple(attr), tuple(val)
     newdata = [data[0]]
     newdata.append(str(attr))
