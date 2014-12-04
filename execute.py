@@ -55,9 +55,8 @@ def execi(query):
                     #dump json
                     fo = open('languageprocess1/words.json', 'w')
                     json.dump(z, fo, indent = 4)
-
+            db.commit()
             return 'Successful with interpreted query as: ' + oquery
-        db.commit()
     except Exception as e:
         db.rollback()
         print(e)

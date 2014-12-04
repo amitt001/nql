@@ -132,7 +132,11 @@ def sqltokenize(qinput):
         try:
             lenth = len(qinput)
             for l in range(lenth):
-                newinput[newinput.index('sql')] = qinput[l] + ','
+                # to put quotes for alpha
+                if qinput[l].isalpha():
+                    newinput[newinput.index('sql')] = '"' + qinput[l] + '"' + ','
+                else:
+                    newinput[newinput.index('sql')] = qinput[l] + ','
         except:
             return ['This table schema doesnt exists in "words.json" file']
         newinput[-1] = newinput[-1].rstrip(',')
@@ -174,7 +178,9 @@ def insert_token(qinput):
             if i == lnth:
                 stri += data[i-1]
             val.append(stri)
-    attr,val = tuple(attr), tuple(val)
+    # to remove spaces
+    attr = tuple([i.strip() for i in attr])
+    val = tuple([j.strip() for j in val])
     newdata = [data[0]]
     newdata.append(str(attr))
     newdata.append('VALUES')
