@@ -20,8 +20,11 @@ def index():
     '''application home page with search box'''
 
     if request.method == 'POST':
-        query = request.form['filename']
-        squery = languageprocess1.creater.sqlize(query)
+        query = request.form['query']
+        sampleinput = None
+        if request.form['input']:
+            sampleinput = request.form['input']
+        squery = languageprocess1.creater.sqlize(query, sampleinput)
         s = execute.execi(squery)
         global quer 
         quer = squery

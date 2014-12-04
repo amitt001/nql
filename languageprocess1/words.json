@@ -4,25 +4,30 @@
         "name", 
         "class"
     ], 
-    "computer_no": [
-        "part_no", 
-        "name", 
-        "supplier"
-    ], 
     "student": [
         "id", 
         "name", 
         "score"
+    ], 
+    "newstud": [
+        "id", 
+        "studname", 
+        "location"
+    ], 
+    "nql": [
+        "nql_tab_no", 
+        "nql_user", 
+        "country"
     ], 
     "user": [
         "id", 
         "name", 
         "address"
     ], 
-    "nql": [
-        "nql_tab_no", 
-        "nql_user", 
-        "country"
+    "computer_no": [
+        "part_no", 
+        "name", 
+        "supplier"
     ], 
     "college": [
         "coll_id", 

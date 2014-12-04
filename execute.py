@@ -10,7 +10,6 @@ execute the normalized sql queries on database
 def execi(query):
     db = sqlite3.connect('db/nql.db') 
     cursor = db.cursor()
-    #query = "CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT, phone TEXT, email TEXT unique, password TEXT)"
 
     try:
         if 'SELECT' in query:

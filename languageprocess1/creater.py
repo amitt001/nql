@@ -25,7 +25,7 @@ sqldict.setdefault('LESS THAN', ['below', 'less', 'lower'])
 create_template = ['CREATE', 'TABLE', '(', ')']
 ####################################################
 
-def sqlize(qinput):
+def sqlize(qinput, sample = None):
     # log queries
     fobj = open('logs', 'a');
     fobj.write('Query: ' + qinput + '\n')
@@ -39,7 +39,7 @@ def sqlize(qinput):
     length = len(data) 
     #data = ' '.join(data)
     if length > 2 or ('SELECT' in data or 'CREATE' in data):
-        data = sqltokenize(data)
+        data = sqltokenize(data, sample)
     else: #maybe sqlite specific-*check
         data = singlequery(data)
     data = ' '.join(data) 
@@ -50,7 +50,7 @@ def sqlize(qinput):
 datatype = ['text', 'integer', 'varchar']
 
 
-def sqltokenize(qinput):
+def sqltokenize(qinput, sample):
     '''rightnow doing it for create only
     '''
     if 'CREATE' in qinput:
@@ -66,7 +66,12 @@ def sqltokenize(qinput):
 #                attributes = str(tuple(qinput[1:])).lstrip('(').rstrip(')')
 #               attributes = attributes.replace(',', '') # maybe needed for ',' replace condition
 #                newinput.insert(ind + 1 , attributes)
-        a = ('1, amit, addr').split(',')
+
+        # For CREATE query data type interpretation. user only need to eneter the sample input :)
+        a = ('1, amit, addr').split(',') #default
+        if sample:
+            sample = sample.replace(',', '').split()
+            a = sample
         b = []
         # to determine the datatype of attributes
         for i in a: 
@@ -76,7 +81,6 @@ def sqltokenize(qinput):
                 b.append('TEXT')
             else:
                 b.append('TEXT')
-
         attrs = newinput[newinput.index('(')+1:-1]#get attributes from newdata
         for ind, attr in enumerate(attrs):
 #            attr = attr.replace(',', '')
