@@ -1,23 +1,29 @@
 {
-    "book": [
-        "id", 
-        "name", 
-        "class"
-    ], 
-    "student": [
-        "id", 
-        "name", 
-        "score"
-    ], 
     "newstud": [
         "id", 
         "studname", 
         "location"
     ], 
+    "book": [
+        "id", 
+        "name", 
+        "class"
+    ], 
+    "colltab": [
+        "id", 
+        "studname", 
+        "location", 
+        "country"
+    ], 
     "nql": [
         "nql_tab_no", 
         "nql_user", 
         "country"
+    ], 
+    "college": [
+        "coll_id", 
+        "coll_name", 
+        "location"
     ], 
     "user": [
         "id", 
@@ -29,9 +35,9 @@
         "name", 
         "supplier"
     ], 
-    "college": [
-        "coll_id", 
-        "coll_name", 
-        "location"
+    "student": [
+        "id", 
+        "name", 
+        "score"
     ]
 }
