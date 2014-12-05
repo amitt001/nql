@@ -1,0 +1,55 @@
+{
+    "colltab": [
+        "id", 
+        "studname", 
+        "location", 
+        "country"
+    ], 
+    "student": [
+        "id", 
+        "name", 
+        "score"
+    ], 
+    "computer_no": [
+        "part_no", 
+        "name", 
+        "supplier"
+    ], 
+    "nqaltable": [
+        "nqltabid", 
+        "nqlname", 
+        "creaters", 
+        "admins"
+    ], 
+    "user": [
+        "id", 
+        "name", 
+        "address"
+    ], 
+    "book": [
+        "id", 
+        "name", 
+        "class"
+    ], 
+    "college": [
+        "coll_id", 
+        "coll_name", 
+        "location"
+    ], 
+    "nqlssstable": [
+        "nqltabid", 
+        "nqlname", 
+        "creaters", 
+        "admins"
+    ], 
+    "nql": [
+        "nql_tab_no", 
+        "nql_user", 
+        "country"
+    ], 
+    "newstud": [
+        "id", 
+        "studname", 
+        "location"
+    ]
+}

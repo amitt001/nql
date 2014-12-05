@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import languageprocess1.stopword
+import languageprocess.stopword
 import re
 import json
 
@@ -25,11 +25,12 @@ sqldict.setdefault('LESS THAN', ['below', 'less', 'lower'])
 create_template = ['CREATE', 'TABLE', '(', ')']
 ####################################################
 
+
 def sqlize(qinput, sample = None):
     # log queries
     fobj = open('logs', 'a');
     fobj.write('Query: ' + qinput + '\n')
-    data = languageprocess1.stopword.stopwordremover(qinput)
+    data = languageprocess.stopword.stopwordremover(qinput)
     for i in data:      # sql word synonyms corrections
         for key, value in sqldict.items():
             if i.lower() in value:
@@ -40,7 +41,7 @@ def sqlize(qinput, sample = None):
     #data = ' '.join(data)
     if length > 2 or ('SELECT' in data or 'CREATE' in data):
         data = sqltokenize(data, sample)
-    else: #maybe sqlite specific-*check
+    else:
         data = singlequery(data)
     data = ' '.join(data) 
     fobj.write('SQLized: ' + data + '\n\n') #logging
@@ -63,18 +64,16 @@ def sqltokenize(qinput, sample):
                 for i in range(1,len(qinput)):
                     newinput.insert(-1,qinput[i]+',')
                 newinput[-2] = newinput[-2].rstrip(',')
-#                attributes = str(tuple(qinput[1:])).lstrip('(').rstrip(')')
-#               attributes = attributes.replace(',', '') # maybe needed for ',' replace condition
-#                newinput.insert(ind + 1 , attributes)
 
         # For CREATE query data type interpretation. user only need to eneter the sample input :)
-        a = ('1, amit, addr').split(',') #default
-        if sample:
+        try:
             sample = sample.replace(',', '').split()
-            a = sample
+        except Exception as e:
+            return ['ERROR: You need to input sample input... Please try again with sample input.']
+
         b = []
         # to determine the datatype of attributes
-        for i in a: 
+        for i in sample: 
             if i.replace('.','').isdigit(): # for the float cases
                 b.append('INTEGER')
             elif i.isalpha():
@@ -99,7 +98,7 @@ def sqltokenize(qinput, sample):
         newinput.insert(0, 'SELECT')
         newinput.insert(1, '*')
         newinput.insert(2, 'FROM')
-        with open('languageprocess1/words.json', 'r') as fobj:
+        with open('languageprocess/words.json', 'r') as fobj:
             js = json.load(fobj)
         # to get the table name and values associated with table name key
         for ind, dat in enumerate(qinput):
@@ -142,7 +141,7 @@ def sqltokenize(qinput, sample):
                 else:
                     newinput[newinput.index('sql')] = qinput[l] + ','
         except:
-            return ['This table schema doesnt exists in "words.json" file']
+            return ['ERROR: This table schema doesnt exists in "words.json" file']
         newinput[-1] = newinput[-1].rstrip(',')
         return newinput
 

@@ -2,8 +2,8 @@
 
 from flask import Flask, render_template, request, url_for, redirect, session
 import execute
-import languageprocess1.creater
-import languageprocess1.tokenizer
+import languageprocess.sqlizer
+import languageprocess.tokenizer
 import sys
 import os
 
@@ -24,10 +24,17 @@ def index():
         sampleinput = None
         if request.form['input']:
             sampleinput = request.form['input']
-        squery = languageprocess1.creater.sqlize(query, sampleinput)
+        squery = languageprocess.sqlizer.sqlize(query, sampleinput)
+        #for exception rasied cases
+        if 'ERROR:' in squery:
+            result = str(squery)
+            session['result'] = result
+            return redirect(url_for('search', result = result))
+
         s = execute.execi(squery)
         global quer 
         quer = squery
+
         if s:
             result = str(s)
             session['result'] = result
@@ -46,8 +53,6 @@ def search():
     result = session['result']
     print(result)
     return render_template('result.html', value=result)
-#    print()
-#    return render_template('result.html', value=result)
 
 
 if __name__ == '__main__':

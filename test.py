@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import languageprocess1.creater
+import languageprocess.sqlizer
 import sys
 
 '''
@@ -11,6 +11,6 @@ try:
     query = sys.argv[1]
 except:
     query = "no query"
-i = languageprocess1.creater.sqlize(query)
+i = languageprocess.sqlizer.sqlize(query)
 
 print(i)

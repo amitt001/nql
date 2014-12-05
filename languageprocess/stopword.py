@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import languageprocess1.tokenizer 
-import languageprocess1.normalizer
+import languageprocess.tokenizer 
+import languageprocess.normalizer
 
 '''
 Stop word remover removes stop words from a list of words or stringand return strings
@@ -17,7 +17,7 @@ stopwords['english'] = ['a', 'about', 'above', 'after', 'again', 'against', 'am'
 def stopwordremover(text):
 
     data = text
-    data = languageprocess1.normalizer.normalize(data)
+    data = languageprocess.normalizer.normalize(data)
 #######################################improve this for digits, removed for inser query#############################
     if 'select' not in data and 'from' not in data: #improve
         newdata = [newtext for newtext in data if newtext not in stopwords['english']] #and not newtext.isdigit()]###check this for digit##### 

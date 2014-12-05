@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import languageprocess1.tokenizer
+import languageprocess.tokenizer
 import re
 
 
 '''
-Normalize the given text
+Normalize the given text.
 '''
 
-def normalize(text):
-    data = languageprocess1.tokenizer.tokenize(text)
+def normalize(abnormal):
+    data = languageprocess.tokenizer.tokenize(abnormal)
     for i,value in enumerate(data):
         if not re.match(r'^[A-Z]*$', value) and ('"' or "'") not in value:
             data[i] = value.lower()

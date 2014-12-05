@@ -44,7 +44,7 @@ def execi(query):
                         else:
                             worddict[key].append(words)
                 print(worddict)
-                fo = open('languageprocess1/words.json')
+                fo = open('languageprocess/words.json')
                 js = json.load(fo)
                 if not js.get(key):
                     #copy dict
@@ -52,7 +52,7 @@ def execi(query):
                     z.update(worddict)
                     fo.close()
                     #dump json
-                    fo = open('languageprocess1/words.json', 'w')
+                    fo = open('languageprocess/words.json', 'w')
                     json.dump(z, fo, indent = 4)
             db.commit()
             return 'Successful with interpreted query as: ' + oquery
